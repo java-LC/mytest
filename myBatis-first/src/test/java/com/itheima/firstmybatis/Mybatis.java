@@ -1,4 +1,4 @@
-package com.itheima.firstmybatis;
+﻿package com.itheima.firstmybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ import com.itheima.dao.impl.UserDaoImp;
 import com.itheima.pojo.User;
 
 public class Mybatis {
+
 	private SqlSessionFactory  sqlSessionFactory;
 	private UserDao userDao;
 	@Before
@@ -25,6 +26,7 @@ public class Mybatis {
 		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 		//创建sessiionFactory(mybatis核心对象)
 		sqlSessionFactory = builder.build(inputStream);
+		System.out.println("修改了git");
 	}
 	
 	
