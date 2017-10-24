@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="test">
+	<!--根据用户Id查询用户 -->
+	<select id="findUserById" parameterType="int" resultType="com.itheima.pojo.User">
+		select * from user where id = #{id}
+	</select>
+	<!--根据用户名称模糊查询 -->
+	<select id="findUserLikeUsername" parameterType="string"
+		resultType="com.itheima.pojo.User">
+		<!-- select * from user where username like #{username} -->
+		select * from user where username like '%${value}%'
+	</select>
+	<!--增加用户 -->
+	<insert id="addUser" parameterType="com.itheima.pojo.User">
+		insert into user
+		(id,username,birthday,sex,address)values(#{id},#{username},#{birthday},#{sex},#{address})
+	</insert>
+	<!--增加用户 -->
+	<!-- keyColumn(主键字段) keyProperty(主键属性<实体pojo>) -->
+	<insert id="insertUser" parameterType="com.itheima.pojo.User"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into
+		user(username,birthday,sex,address)values(#{username},#{birthday},#{sex},#{address})
+		<selectKey keyColumn="id" keyProperty="id" resultType="int"
+			order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<!--根据id修改用户 -->
+	<update id="updateUser" parameterType="com.itheima.pojo.User">
+		update user set username=#{username},sex=#{sex} where id=#{id}
+	</update>
+	<!--根据id删除用户  -->
+	<delete id="deleteUserById" parameterType="int">
+		delete from user where id = #{id}
+	</delete>
+</mapper>
